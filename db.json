@@ -1,82 +1,22 @@
 {
   "chores": [
     {
-      "title": "Practice Guitarrrrrr",
-      "priority": "Low",
-      "duration": "5 Minutes",
-      "id": 1
-    },
-    {
-      "title": "Learn AWS",
-      "priority": "Medium",
-      "duration": "1.5 Hours",
-      "id": 2
-    },
-    {
-      "title": "Do Practice Lesson",
-      "priority": "High",
-      "duration": "1.5 Hours",
-      "id": 3
-    },
-    {
-      "title": "Drink Redbull",
-      "priority": "Super High",
-      "duration": "All Day",
-      "id": 4
-    },
-    {
-      "title": "Wash Dishes",
-      "priority": "Eh",
-      "duration": "2 Hours",
-      "id": 5
-    },
-    {
-      "title": "Wash Dishes",
-      "priority": "Eh",
-      "duration": "2 Hours",
-      "id": 6
-    },
-    {
-      "title": "Wash Dishes",
-      "priority": "Ehhhhh",
-      "duration": "2 Hours",
-      "id": 7
-    },
-    {
-      "title": "Say hi to D-Rock",
-      "priority": "Depends",
-      "duration": "0.5 seconds",
-      "id": 8
-    },
-    {
-      "title": "Get Pastries",
-      "priority": "Do or Die",
-      "duration": "30 Seconds",
-      "id": 9
-    },
-    {
-      "title": "Get More Pastries",
-      "priority": "Do or Die",
-      "duration": "30 Seconds",
-      "id": 10
-    },
-    {
-      "title": "fdsaf",
-      "priority": "fdasfds",
-      "duration": "fdas",
-      "id": 11
-    },
-    {
-      "title": "fdafsa",
-      "priority": "fdasfdsa",
-      "duration": "fdsafdsa",
-      "id": 12
-    },
-    {
       "title": "Get Snacks from Natsuki",
       "priority": "High",
       "duration": "Everyday",
       "id": 13
+    },
+    {
+      "title": "Eat Lunch",
+      "priority": "Low",
+      "duration": "5 minutes",
+      "id": 14
+    },
+    {
+      "title": "Fix Phone",
+      "priority": "High",
+      "duration": "???",
+      "id": 15
     }
   ]
 }

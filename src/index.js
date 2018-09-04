@@ -1,42 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+  let choreList = document.getElementById('chore-list')
 
   // fetch list of chores from database
   fetch('http://localhost:3000/chores')
     .then(response =>response.json())
     .then(data => {
-      // find the 'chore list div'
-      let choreList = document.getElementById('chore-list')
-
-      // iterate through our chore-data-array
       data.forEach(chore => {
-        // - create html element that represents a single chore
-        let choreItem = document.createElement('div')
-        let choreTitle = document.createElement('p')
-        choreTitle.innerText = chore.title
-        let chorePriority = document.createElement('p')
-        chorePriority.innerText = chore.priority
-        let choreDuration = document.createElement('p')
-        choreDuration.innerText = chore.duration
-
-        choreItem.append(choreTitle, chorePriority, choreDuration)
-
-        // append the element we just created to the chore list
-        choreList.append(choreItem)
+        choreList.append(createChoreDiv(chore))
       });
     })
 
-    // creating new chores using HTML form
-
-    // locate form containing data for chore creation
+    // create chore
     let newChoreForm = document.getElementById('new-chore-form')
     newChoreForm.addEventListener('submit', (event) => {
       event.preventDefault()
-      // obtain values for title, priority, duration
       let titleInput = document.getElementById('title')
       let priorityInput = document.getElementById('priority')
       let durationInput = document.getElementById('duration')
 
-      // 'create' new form by updating database with values from form
       fetch('http://localhost:3000/chores', {
         method: 'POST',
         headers: {
@@ -48,20 +29,44 @@ document.addEventListener('DOMContentLoaded', () => {
           duration: durationInput.value
         })
       }).then(response => response.json()).then(chore =>{
-        // create new chore HTML element using new chore data
-        let choreItem = document.createElement('div')
-        let choreTitle = document.createElement('p')
-        choreTitle.innerText = chore.title
-        let chorePriority = document.createElement('p')
-        chorePriority.innerText = chore.priority
-        let choreDuration = document.createElement('p')
-        choreDuration.innerText = chore.duration
-        choreItem.append(choreTitle, chorePriority, choreDuration)
-
-        //append the HTML element we just created to the chore list
-        let choreList = document.getElementById('chore-list')
-        choreList.append(choreItem)
+        choreList.append(createChoreDiv(chore))
       })
 
     })
+
+    // delete chore
+    choreList.addEventListener('click', (event)=>{
+     if (event.target.className === 'delete-button') {
+       // delete from database
+       fetch(`http://localhost:3000/chores/${event.target.parentNode.dataset.id}`, { method: 'DELETE'})
+        .then(response => {
+          choreList.removeChild(event.target.parentNode)
+        })
+        .catch(error => alert(error))
+      }
+    })
+
+    // edit chore
+    choreList.addEventListener('click', (event) => {
+      if (event.target.classList.contains('chore-title')) {
+        event.target.classList.add('hidden')
+        let editTitle = event.target.parentNode.querySelector('input')
+        editTitle.classList.remove('hidden')
+      }
+    })
+    
 })
+
+function createChoreDiv(chore) {
+  let choreItem = document.createElement('div')
+  choreItem.innerHTML = `
+            <p class='chore-title'>${chore.title}</p>
+            <input data-id=${chore.id} name='edit-chore-title' value='${chore.title}' class='hidden' >
+            <p>${chore.priority}</p>
+            <p>${chore.duration}</p>
+            <button class='delete-button'>Delete Chore</button>
+        `
+  choreItem.classList.add('chore-card')
+  choreItem.dataset.id = chore.id 
+  return choreItem
+}
